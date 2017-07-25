@@ -18,6 +18,8 @@
 package com.example.android.customtransition;
 
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v4.app.FragmentTransaction;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -47,7 +49,12 @@ public class MainActivity extends SampleActivityBase {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        new Handler(new Handler.Callback() {
+            @Override
+            public boolean handleMessage(Message message) {
+                return false;
+            }
+        });
         if (savedInstanceState == null) {
             FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
             CustomTransitionFragment fragment = new CustomTransitionFragment();

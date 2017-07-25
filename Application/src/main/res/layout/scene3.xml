@@ -22,7 +22,12 @@
     android:layout_height="match_parent"
     android:orientation="horizontal"
     tools:context="com.example.android.customtransition.CustomTransitionFragment">
-
+    <View
+        android:id="@+id/view_3"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_margin="8dp"
+        android:background="#0f0"/>
     <View
         android:id="@+id/view_1"
         android:layout_width="64dp"
@@ -37,11 +42,6 @@
         android:layout_margin="8dp"
         android:background="#f00"/>
 
-    <View
-        android:id="@+id/view_3"
-        android:layout_width="64dp"
-        android:layout_height="64dp"
-        android:layout_margin="8dp"
-        android:background="#0f0"/>
+
 
 </LinearLayout>

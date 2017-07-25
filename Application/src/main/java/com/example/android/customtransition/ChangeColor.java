@@ -34,6 +34,7 @@ import android.view.ViewPropertyAnimator;
 public class ChangeColor extends Transition {
 
     /** Key to store a color value in TransitionValues object */
+    //what's the rules here?
     private static final String PROPNAME_BACKGROUND = "customtransition:change_color:background";
 
     // BEGIN_INCLUDE (capture_values)
@@ -71,8 +72,10 @@ public class ChangeColor extends Transition {
         if (null == startValues || null == endValues) {
             return null;
         }
-        // Store a convenient reference to the target. Both the starting and ending layout have the
+        // Store a convenient reference to the target.
+        // Both the starting and ending layout have the
         // same target.
+//        View view = startValues.view;//效果是一样的
         final View view = endValues.view;
         // Store the object containing the background property for both the starting and ending
         // layouts.
@@ -92,8 +95,7 @@ public class ChangeColor extends Transition {
                 // animation runs on the UI thread. The Evaluator controls what type of
                 // interpolation is done. In this case, an ArgbEvaluator interpolates between two
                 // #argb values, which are specified as the 2nd and 3rd input arguments.
-                ValueAnimator animator = ValueAnimator.ofObject(new ArgbEvaluator(),
-                        startColor.getColor(), endColor.getColor());
+                ValueAnimator animator = ValueAnimator.ofObject(new ArgbEvaluator(), startColor.getColor(), endColor.getColor());
                 // Add an update listener to the Animator object.
                 animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
                     @Override
@@ -116,4 +118,9 @@ public class ChangeColor extends Transition {
     }
     // END_INCLUDE (create_animator)
 
+
+    @Override
+    public String[] getTransitionProperties() {
+        return super.getTransitionProperties();
+    }
 }

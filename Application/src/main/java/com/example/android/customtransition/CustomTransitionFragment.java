@@ -18,12 +18,16 @@ package com.example.android.customtransition;
 
 import com.example.android.common.logger.Log;
 
+import android.animation.PropertyValuesHolder;
+import android.animation.ValueAnimator;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.transition.ChangeBounds;
 import android.transition.Scene;
 import android.transition.Transition;
 import android.transition.TransitionManager;
+import android.transition.TransitionSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -44,6 +48,7 @@ public class CustomTransitionFragment extends Fragment implements View.OnClickLi
 
     /** This is the custom Transition we use in this sample. */
     private Transition mTransition;
+    private TransitionSet set;
 
     public CustomTransitionFragment() {
     }
@@ -62,13 +67,17 @@ public class CustomTransitionFragment extends Fragment implements View.OnClickLi
             mCurrentScene = savedInstanceState.getInt(STATE_CURRENT_SCENE);
         }
         // We set up the Scenes here.
+        //修改了一下场景中三个view的位置 使三个
         mScenes = new Scene[] {
                 Scene.getSceneForLayout(container, R.layout.scene1, context),
                 Scene.getSceneForLayout(container, R.layout.scene2, context),
                 Scene.getSceneForLayout(container, R.layout.scene3, context),
         };
         // This is the custom Transition.
-        mTransition = new ChangeColor();
+        set = new TransitionSet();
+        set.addTransition(new ChangeBounds());
+        set.addTransition(new ChangeColor());
+//        mTransition = new ChangeBounds();
         // Show the initial Scene.
         TransitionManager.go(mScenes[mCurrentScene % mScenes.length]);
     }
@@ -86,7 +95,7 @@ public class CustomTransitionFragment extends Fragment implements View.OnClickLi
                 mCurrentScene = (mCurrentScene + 1) % mScenes.length;
                 Log.i(TAG, "Transitioning to scene #" + mCurrentScene);
                 // Pass the custom Transition as second argument for TransitionManager.go
-                TransitionManager.go(mScenes[mCurrentScene], mTransition);
+                TransitionManager.go(mScenes[mCurrentScene],set);
                 break;
             }
         }
